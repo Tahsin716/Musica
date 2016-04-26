@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <!-- btn_next_pressed Pressed -->
+        <item android:drawable="@drawable/img_btn_next_pressed"
+            android:state_focused="true"
+            android:state_pressed="true" />
+
+        <!-- btn_next_pressed Normal -->
+        <item android:drawable="@drawable/img_btn_next_pressed"
+            android:state_focused="false"
+            android:state_pressed="true" />
+
+        <!-- btn_next_pressed Focused -->
+        <item android:drawable="@drawable/img_btn_next_pressed"
+            android:state_focused="true" />
+
+        <!-- btn_next Normal -->
+        <item android:drawable="@drawable/img_btn_next"
+            android:state_focused="false"
+            android:state_pressed="false" />
+    </selector>

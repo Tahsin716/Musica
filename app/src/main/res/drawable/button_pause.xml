@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <!-- btn_pause_pressed Pressed -->
+        <item android:drawable="@drawable/img_btn_pause_pressed"
+              android:state_focused="true"
+              android:state_pressed="true" />
+
+        <!-- btn_pause_pressed Focused -->
+        <item android:drawable="@drawable/img_btn_pause_pressed"
+              android:state_focused="true" />
+
+        <!-- btn_pause_pressed Normal -->
+        <item android:drawable="@drawable/img_btn_pause_pressed"
+              android:state_focused="false"
+              android:state_pressed="true" />
+
+        <!-- btn_pause Normal -->
+        <item android:drawable="@drawable/img_btn_pause"
+              android:state_focused="false"
+              android:state_pressed="false" />
+
+    </selector>

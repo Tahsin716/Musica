@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <!-- btn_backward_pressed Pressed -->
+        <item android:drawable="@drawable/img_btn_backward_pressed"
+              android:state_focused="true"
+              android:state_pressed="true" />
+
+        <!-- btn_backward_pressed Normal -->
+        <item android:drawable="@drawable/img_btn_backward_pressed"
+              android:state_focused="false"
+              android:state_pressed="true" />
+
+        <!-- btn_backward_pressed Focused -->
+        <item android:drawable="@drawable/img_btn_backward_pressed"
+              android:state_focused="true" />
+
+        <!-- btn_backward Normal -->
+        <item android:drawable="@drawable/img_btn_backward"
+              android:state_focused="false"
+              android:state_pressed="false" />
+
+    </selector>

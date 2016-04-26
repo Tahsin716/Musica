@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <!-- btn_play_pressed Pressed-->
+        <item android:drawable="@drawable/img_btn_play_pressed"
+              android:state_focused="true"
+              android:state_pressed="true" />
+
+        <!-- btn_play_pressed Focused-->
+        <item android:drawable="@drawable/img_btn_play_pressed"
+              android:state_focused="true" />
+
+        <!-- btn_play_pressed Normal-->
+        <item android:drawable="@drawable/img_btn_play_pressed"
+              android:state_pressed="true"
+              android:state_focused="false" />
+
+        <!-- btn_play Normal-->
+        <item android:drawable="@drawable/img_btn_play"
+              android:state_focused="false"
+              android:state_pressed="false" />
+
+    </selector>
