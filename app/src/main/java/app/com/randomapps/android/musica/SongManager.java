@@ -26,7 +26,7 @@ public class SongManager {
             //
             for (File file : home.listFiles(new FileExtensionFilter())) {
                 HashMap<String, String> song = new HashMap<String, String>();
-                song.put("songTitle", file.getName().substring(0, (file.getName().length() - 4)));
+                song.put("songTitle", file.getName().substring(0, (file.getName().length() - 4))); //TODO: -4
                 song.put("songPath", file.getPath());
 
                 // Adding each song to SongList
