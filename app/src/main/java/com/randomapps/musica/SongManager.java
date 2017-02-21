@@ -1,4 +1,4 @@
-package app.com.randomapps.android.musica;
+package com.randomapps.musica;
 
 
 import java.io.File;
