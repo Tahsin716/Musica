@@ -1,9 +1,12 @@
 package com.randomapps.musica;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -31,8 +34,6 @@ public class MainActivity extends AppCompatActivity {
         songList = songManager.getSongsList();
         listItems = new String[songList.size()];
 
-        String[] debug = {"hello", "world", "my", "name", "is", "tahsin", "rashad"};
-
         //Remove the file extension '.mp3' from the name
         for(int i = 0; i < songList.size(); i++) {
             listItems[i] = songList.get(i).getName().replace(".mp3", "");
@@ -41,6 +42,18 @@ public class MainActivity extends AppCompatActivity {
         //ArrayAdapter for setting up the ListView
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.row_layout, R.id.text_view, listItems);
         listView.setAdapter(arrayAdapter);
+
+        //Start MediaPlayer
+        //Send song position and songList
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainActivity.this, Player.class);
+                intent.putExtra("position", position);
+                intent.putExtra("song_list", songList);
+                startActivity(intent);
+            }
+        });
     }
 
     /**
