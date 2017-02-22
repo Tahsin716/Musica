@@ -34,7 +34,7 @@ public class Player extends AppCompatActivity {
 
     //Uniform Resource Identifier, used for media player to pass song name
     Uri uri;
-    //Seebar updated in Thread
+    //Seekbar updated in Thread
     static SeekBarUpdater seekBarUpdater;
 
     byte[] art;
@@ -215,6 +215,12 @@ public class Player extends AppCompatActivity {
         path = songList.get(position).getName();
         uri = Uri.parse(path);
         mediaPlayer = MediaPlayer.create(this, uri);
+        mediaPlayer.start();
+        play.setImageResource(R.drawable.pause);
+        seekBar.setMax(mediaPlayer.getDuration());
+        seekBar.setProgress(mediaPlayer.getCurrentPosition());
+        seekBarUpdater = new SeekBarUpdater(true);
+        seekBarUpdater.start();
     }
 
 }
