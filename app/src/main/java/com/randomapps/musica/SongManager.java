@@ -46,7 +46,6 @@ public class SongManager {
             fetchStatus = true;
             songsList = songs;
 
-            return songs;
         }
         return songs;
     }
