@@ -188,4 +188,33 @@ public class Player extends AppCompatActivity {
         }
     }
 
+    /**
+     * Reduces repetition of fairy common functionalities
+     * next, prev and on-completion has
+     */
+    public void playbackUtils(String callback) {
+        if(seekBarUpdater != null) {
+            seekBarUpdater.stopThread();
+            seekBarUpdater.interrupt();
+            seekBarUpdater = null;
+        }
+
+        mediaPlayer.stop();
+        mediaPlayer.release();
+
+        //If callback is next or complete we will go to the next song
+        //but modulus is taken to not go array index out of bounds
+        //similarly for previous if first song is playing, we go to the last one
+        if(callback.equals("next") || callback.equals("complete")) {
+            position =  (position + 1) % songList.size();
+        }
+        else {
+            position = (position - 1 < 0) ? songList.size() - 1 : position - 1;
+        }
+
+        path = songList.get(position).getName();
+        uri = Uri.parse(path);
+        mediaPlayer = MediaPlayer.create(this, uri);
+    }
+
 }
