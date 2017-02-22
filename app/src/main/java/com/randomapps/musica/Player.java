@@ -58,6 +58,15 @@ public class Player extends AppCompatActivity {
             mediaPlayer.stop();
             mediaPlayer.release();
         }
+
+        setSongData(path,position);
+        mediaPlayer = MediaPlayer.create(this, uri);
+        mediaPlayer.start();
+        play.setImageResource(R.drawable.pause);
+
+        seekBar.setMax(mediaPlayer.getDuration());
+        //seekBarUpdater = new SeekBarUpdater(true);
+        //seekBarUpdater.start();
     }
 
     public void init() {
@@ -78,6 +87,10 @@ public class Player extends AppCompatActivity {
     }
 
     class SeekBarUpdater extends Thread {
+
+    }
+
+    public void setSongData(String songPath, int pos) {
 
     }
 
