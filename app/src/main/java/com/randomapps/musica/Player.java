@@ -86,8 +86,41 @@ public class Player extends AppCompatActivity {
         uri = Uri.parse(path);
     }
 
+    /**
+     * If running is true then seekbar is updating else no
+     * A thread is opened where the seekbar is updated every 5 milisecond
+     * if current is greater than total duration then we break out of the loop
+     */
     class SeekBarUpdater extends Thread {
+        private boolean running;
 
+        public SeekBarUpdater(boolean status) {
+            running = status;
+        }
+
+        public void stopThread() {
+            running = false;
+        }
+
+        @Override
+        public void run() {
+            try {
+                while (running) {
+                    int duration = mediaPlayer.getDuration();
+                    int current = mediaPlayer.getCurrentPosition();
+
+                    while (current < duration) {
+                        sleep(500);
+                        current = mediaPlayer.getCurrentPosition();
+                        seekBar.setProgress(current);
+                    }
+                }
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+                running = false;
+            }
+        }
     }
 
     public void setSongData(String songPath, int pos) {
