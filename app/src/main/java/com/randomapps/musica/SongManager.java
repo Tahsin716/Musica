@@ -51,6 +51,17 @@ public class SongManager {
         return songs;
     }
 
+    /**
+     * Returns the fetchStatus
+     */
+    public boolean getFetchStatus() {
+        return fetchStatus;
+    }
 
-
+    /**
+     * Returns the songList
+     */
+    public ArrayList<File> getSongsList() {
+        return songsList;
+    }
 }
