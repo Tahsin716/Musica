@@ -1,6 +1,7 @@
 package com.randomapps.musica;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -51,9 +52,12 @@ public class Player extends AppCompatActivity {
         setContentView(R.layout.activity_player);
         init();
 
+        //If a song is already playing stop and release media player
+        //Also stop the seekbar thread if, the song was not paused or completed
         if(mediaPlayer != null) {
             if(seekBarUpdater != null) {
-                //code it
+                seekBarUpdater.stopThread();
+                seekBarUpdater.interrupt();
             }
             mediaPlayer.stop();
             mediaPlayer.release();
@@ -65,8 +69,8 @@ public class Player extends AppCompatActivity {
         play.setImageResource(R.drawable.pause);
 
         seekBar.setMax(mediaPlayer.getDuration());
-        //seekBarUpdater = new SeekBarUpdater(true);
-        //seekBarUpdater.start();
+        seekBarUpdater = new SeekBarUpdater(true);
+        seekBarUpdater.start();
     }
 
     public void init() {
@@ -123,8 +127,29 @@ public class Player extends AppCompatActivity {
         }
     }
 
+    /**
+     * Sets the embedded song data, such as artist-name, album-art etc
+     * if data is not provided then default info is set
+     */
     public void setSongData(String songPath, int pos) {
+        mediaMetadataRetriever = new MediaMetadataRetriever();
+        mediaMetadataRetriever.setDataSource(songPath);
 
+        try {
+            songName = mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
+            art = mediaMetadataRetriever.getEmbeddedPicture();
+            songArt = BitmapFactory.decodeByteArray(art, 0, art.length);
+            artistName = mediaMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
+
+            artist.setText(artistName);
+            name.setText(songName);
+            albumArt.setImageBitmap(songArt);
+        }
+        catch (Exception e) {
+            albumArt.setImageResource(R.drawable.albumart);
+            artist.setText("Unknown Artist");
+            name.setText(songList.get(pos).getName().replace(".mp3",""));
+        }
     }
 
 }
