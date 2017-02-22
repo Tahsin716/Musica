@@ -94,14 +94,27 @@ public class Player extends AppCompatActivity {
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mediaPlayer.isPlaying()) {
+                if (mediaPlayer.isPlaying()) {
                     mediaPlayer.pause();
                     play.setImageResource(R.drawable.pause);
-                }
-                else {
+                } else {
                     mediaPlayer.start();
                     play.setImageResource(R.drawable.play);
                 }
+            }
+        });
+
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                playbackUtils("next");
+            }
+        });
+
+        prev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                playbackUtils("prev");
             }
         });
     }
