@@ -71,8 +71,29 @@ public class Player extends AppCompatActivity {
         seekBar.setMax(mediaPlayer.getDuration());
         seekBarUpdater = new SeekBarUpdater(true);
         seekBarUpdater.start();
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            //For updating the seekbar by draggin it
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                mediaPlayer.seekTo(seekBar.getProgress());
+            }
+        });
     }
 
+    /**
+     * Initializes the UI components
+     */
     public void init() {
         albumArt = (ImageView)findViewById(R.id.albumArt);
         name = (TextView)findViewById(R.id.songName);
