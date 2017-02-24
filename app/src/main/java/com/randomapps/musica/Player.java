@@ -46,7 +46,6 @@ public class Player extends AppCompatActivity {
     //Used for retrieving track information, such as artist-name, album-art etc.
     MediaMetadataRetriever mediaMetadataRetriever;
     static MediaPlayer mediaPlayer;
-    boolean notificationFlag = false;
 
 
 
@@ -109,6 +108,7 @@ public class Player extends AppCompatActivity {
                 mediaPlayer.seekTo(seekBar.getProgress());
             }
         });
+
 
         play.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,6 +181,7 @@ public class Player extends AppCompatActivity {
                         current = mediaPlayer.getCurrentPosition();
                         seekBar.setProgress(current);
                     }
+                    running = false;
                 }
             }
             catch (InterruptedException e) {
