@@ -38,7 +38,7 @@ public class Utilities {
      * Function to get Progress percentage
      */
     public int getProgressPercentage(long currentDuration, long totalDuration){
-        Double percentage = (double) 0;
+        Double percentage;
 
         long currentSeconds = (int) (currentDuration / 1000);
         long totalSeconds = (int) (totalDuration / 1000);
@@ -48,5 +48,19 @@ public class Utilities {
 
         // return percentage
         return percentage.intValue();
+    }
+
+    /**
+     * Function to change progress to timer
+     *
+     * returns current duration in milliseconds
+     */
+    public int progressToTimer(int progress, int totalDuration) {
+        int currentDuration;
+        totalDuration = (totalDuration / 1000);
+        currentDuration = (int) ((((double)progress) / 100) * totalDuration);
+
+        // return current duration in milliseconds
+        return currentDuration * 1000;
     }
 }
