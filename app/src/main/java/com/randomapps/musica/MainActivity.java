@@ -12,10 +12,11 @@ import android.widget.ListView;
 
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Serializable{
 
     ListView listView;
     String baseDirectory;
@@ -50,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MainActivity.this, Player.class);
                 intent.putExtra("position", position);
-                intent.putExtra("song_list", songList);
                 startActivity(intent);
             }
         });

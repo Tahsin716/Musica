@@ -6,6 +6,7 @@ import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
@@ -25,6 +26,8 @@ public class Player extends AppCompatActivity {
     ArrayList<File> songList;
     //Song name
     String path;
+    //Filter out all songs
+    SongManager songManager;
 
     ImageView albumArt;
     TextView name, artist;
@@ -40,7 +43,7 @@ public class Player extends AppCompatActivity {
     byte[] art;
     Bitmap songArt;
 
-    //Used for retrieving song informations, such as artist-name, album-art etc.
+    //Used for retrieving track information, such as artist-name, album-art etc.
     MediaMetadataRetriever mediaMetadataRetriever;
     static MediaPlayer mediaPlayer;
     boolean notificationFlag = false;
@@ -64,7 +67,20 @@ public class Player extends AppCompatActivity {
             mediaPlayer.release();
         }
 
-        setSongData(path,position);
+        //Fetch all the songs
+        songManager = new SongManager();
+        if(!songManager.getFetchStatus()) {
+            songList = songManager.findSongList(Environment.getExternalStorageDirectory());
+        }
+        else {
+            songList = songManager.getSongsList();
+        }
+
+        position = getIntent().getIntExtra("position",0);
+        path = songList.get(position).toString();
+        uri = Uri.parse(path);
+
+        setSongData(path, position);
         mediaPlayer = MediaPlayer.create(this, uri);
         mediaPlayer.start();
         play.setImageResource(R.drawable.pause);
@@ -84,7 +100,7 @@ public class Player extends AppCompatActivity {
 
             }
 
-            //For updating the seekbar by draggin it
+            //For updating the seekbar by dragging it
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 mediaPlayer.seekTo(seekBar.getProgress());
@@ -131,13 +147,8 @@ public class Player extends AppCompatActivity {
         next = (ImageButton)findViewById(R.id.nextButton);
         playlist = (ImageButton)findViewById(R.id.playlistButton);
         seekBar = (SeekBar)findViewById(R.id.seekBar);
-
-        Bundle extras = getIntent().getExtras();
-        position = extras.getInt("position");
-        songList = extras.getParcelable("song_list");
-        path = songList.get(position).getName();
-        uri = Uri.parse(path);
     }
+
 
     /**
      * If running is true then seekbar is updating else no
@@ -176,6 +187,7 @@ public class Player extends AppCompatActivity {
         }
     }
 
+
     /**
      * Sets the embedded song data, such as artist-name, album-art etc
      * if data is not provided then default info is set
@@ -201,9 +213,10 @@ public class Player extends AppCompatActivity {
         }
     }
 
+
     /**
-     * Reduces repetition of fairy common functionalities
-     * next, prev and on-completion has
+     * Reduces repetition of fairly common of
+     * next, prev and on-completion
      */
     public void playbackUtils(String callback) {
         if(seekBarUpdater != null) {
@@ -225,7 +238,7 @@ public class Player extends AppCompatActivity {
             position = (position - 1 < 0) ? songList.size() - 1 : position - 1;
         }
 
-        path = songList.get(position).getName();
+        path = songList.get(position).toString();
         uri = Uri.parse(path);
         mediaPlayer = MediaPlayer.create(this, uri);
         mediaPlayer.start();
