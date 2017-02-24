@@ -77,6 +77,9 @@ public class Player extends AppCompatActivity {
         }
 
         position = getIntent().getIntExtra("position",0);
+
+        //Path has to be toString() not getName()
+        //Else it gives error
         path = songList.get(position).toString();
         uri = Uri.parse(path);
 
@@ -112,10 +115,10 @@ public class Player extends AppCompatActivity {
             public void onClick(View v) {
                 if (mediaPlayer.isPlaying()) {
                     mediaPlayer.pause();
-                    play.setImageResource(R.drawable.pause);
+                    play.setImageResource(R.drawable.play);
                 } else {
                     mediaPlayer.start();
-                    play.setImageResource(R.drawable.play);
+                    play.setImageResource(R.drawable.pause);
                 }
             }
         });
@@ -239,6 +242,7 @@ public class Player extends AppCompatActivity {
         }
 
         path = songList.get(position).toString();
+        setSongData(path, position);
         uri = Uri.parse(path);
         mediaPlayer = MediaPlayer.create(this, uri);
         mediaPlayer.start();
