@@ -136,6 +136,13 @@ public class Player extends AppCompatActivity {
                 playbackUtils("prev");
             }
         });
+
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                playbackUtils("complete");
+            }
+        });
     }
 
     /**
@@ -151,6 +158,7 @@ public class Player extends AppCompatActivity {
         playlist = (ImageButton)findViewById(R.id.playlistButton);
         seekBar = (SeekBar)findViewById(R.id.seekBar);
     }
+
 
 
     /**
@@ -247,7 +255,16 @@ public class Player extends AppCompatActivity {
         uri = Uri.parse(path);
         mediaPlayer = MediaPlayer.create(this, uri);
         mediaPlayer.start();
+
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                playbackUtils("complete");
+            }
+        });
+
         play.setImageResource(R.drawable.pause);
+
         seekBar.setMax(mediaPlayer.getDuration());
         seekBar.setProgress(mediaPlayer.getCurrentPosition());
         seekBarUpdater = new SeekBarUpdater(true);

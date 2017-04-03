@@ -8,7 +8,7 @@ public class Utilities {
      * Timer Format
      * Hours:Minutes:Seconds
      */
-    public String milliSecondsToTimer(long milliseconds){
+    public String milliSecondsToTimer(int milliseconds){
         String finalTimerString = "";
         String secondsString;
 
